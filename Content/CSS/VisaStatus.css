@@ -1,0 +1,29 @@
+﻿.header-image {
+    text-align: center;
+}
+
+.visaheading {
+    color: #FF9933;
+}
+
+.visasubheading {
+    color: lawngreen;
+}
+
+.visasubheadingTwo {
+    color: red;
+    text-decoration: underline;
+}
+
+.subsection p {
+    color: blue;
+}
+
+.print-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

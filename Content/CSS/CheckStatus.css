@@ -1,0 +1,33 @@
+﻿/* Add your custom styles here */
+.form-horizontal {
+    /* Add styles for the form container */
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.control-label {
+    /* Add styles for the form labels */
+    font-weight: bold;
+}
+
+.form-control {
+    /* Add styles for the form inputs */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    /* Add styles for the login button */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}

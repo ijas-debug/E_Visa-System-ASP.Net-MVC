@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    
+    <link href="~/Content/CSS/Layout.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="@Url.Content("/Content/NavBar.css")" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+    <script src="~/Scripts/logout.js"></script>
+</head>
+<body style="background-color: #D8F9F9">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+                        <img src="https://www.cgiguangzhou.gov.in/docs/1507963852_download.jpg" alt="Logo" class="navbar-logo">
+                    </a>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li>@Html.ActionLink("Home", "UserHome", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("User profile", "Welcome", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Edit profile", "UpdateUser", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Apply for visa", "VisaApplication", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Check status", "CheckStatus", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Change password", "ChangePassword", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <!-- Footer -->
+        <footer class=" text-center text-dark">
+            <!-- Grid container -->
+            <div class="container p-4 footerayshel">
+                <!-- Section: Social media -->
+                <section class="mb-4">
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+
+
+                    <!-- Google -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.justdial.com/Malappuram/Ayshel-Boutique-Near-Musjid-Mangalam-Mlp/9999PX483-X483-190322202629-T6N6_BZDET" role="button">
+                        <i class="fab fa-google"></i>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.instagram.com/ayshellshop/?hl=en" role="button">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+
+                    <!-- Section: Social media -->
+                    <!-- Section: Text -->
+                    <section class="mb-4">
+                        <p>
+                            Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.
+                        </p>
+                    </section>
+                    <!-- Section: Text -->
+                    <!-- Copyright -->
+                    <div class="footerayshel">
+                        <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.2);">
+                            © 2020 Copyright:
+                            <a class="text-dark" href="https://mdbootstrap.com/">E-Visa.com</a>
+                        </div>
+                    </div>
+
+            </div>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

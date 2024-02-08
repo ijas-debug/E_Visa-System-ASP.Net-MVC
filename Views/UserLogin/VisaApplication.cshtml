@@ -1,0 +1,544 @@
+﻿@model FinalProject.Models.VisaApplication
+
+@{
+    ViewBag.Title = "VisaApplication";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visa Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    @Scripts.Render("~/Content/Script/Validation")
+    <script src="~/Content/Script/Validations.js"></script>
+</head>
+<body>
+    <section class="h-100 h-custom" style="background-color: #8fc4b7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                        <img src="https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                             alt="Sample photo">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Visa Application</h3>
+
+                            @using (Html.BeginForm("VisaApplication", "UserLogin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "px-md-2" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateFirstName()" } })
+                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    <span id="firstNameError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateLastName()" } })
+                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    <span id="lastNameErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date", @max = "2023-07-17", @onfocusout = "validateDateOfBirth()" } })
+                                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                    <span id="dateOfBirthErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateEmailAddress()" } })
+                                    @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                                    <span id="emailAddressErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatePhoneNumber()" } })
+                                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    <span id="phoneNumberErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateAddress()" } })
+                                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    <span id="addressErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ExpectedDateOfArrival, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "dob", @oninput = "validateDate(this)" } })
+                                    @Html.LabelFor(model => model.ExpectedDateOfArrival, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ExpectedDateOfArrival, "", new { @class = "text-danger" })
+                                    
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ExpectedDateOfDeparture, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "dob", @oninput = "validateDate(this)" } })
+                                    @Html.LabelFor(model => model.ExpectedDateOfDeparture, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ExpectedDateOfDeparture, "", new { @class = "text-danger" })
+                                    
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <label class="mr-2">Visa Service:</label>
+                                    <div>
+                                        <label class="mr-2">eTOURIST VISA</label>
+                                        @Html.RadioButtonFor(model => model.VisaService, "eTOURIST VISA")
+                                        <label class="mr-2">eMEDICAL VISA</label>
+                                        @Html.RadioButtonFor(model => model.VisaService, "eMEDICAL VISA")
+                                        <label class="mr-2">eBUSINESS VISA</label>
+                                        @Html.RadioButtonFor(model => model.VisaService, "eBUSINESS VISA")
+                                        <label class="mr-2">eCONFERENCE VISA</label>
+                                        @Html.RadioButtonFor(model => model.VisaService, "eCONFERENCE VISA")
+                                        <label class="mr-2">eMEDICAL ATTENDENT VISA</label>
+                                        @Html.RadioButtonFor(model => model.VisaService, "eMEDICAL ATTENDENT VISA")
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.VisaService, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mr-2">Gender:</label>
+                                    <div>
+                                        <label class="mr-2">Male</label>
+                                        @Html.RadioButtonFor(model => model.Gender, "Male")
+                                        <label class="mr-2">Female</label>
+                                        @Html.RadioButtonFor(model => model.Gender, "Female")
+                                        <label class="mr-2">Others</label>
+                                        @Html.RadioButtonFor(model => model.Gender, "Others")
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.TownCityOfBirth, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateTownCityOfBirth()" } })
+                                    @Html.LabelFor(model => model.TownCityOfBirth, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.TownCityOfBirth, "", new { @class = "text-danger" })
+                                    <span id="townCityOfBirthErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.CountryOfBirth, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateCountryOfBirth()" } })
+                                    @Html.LabelFor(model => model.CountryOfBirth, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.CountryOfBirth, "", new { @class = "text-danger" })
+                                    <span id="countryOfBirthErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.CitizenshipNationalIdNo, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateCitizenshipNationalIdNo()" } })
+                                    @Html.LabelFor(model => model.CitizenshipNationalIdNo, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.CitizenshipNationalIdNo, "", new { @class = "text-danger" })
+                                    <span id="citizenshipNationalIdNoErrorMessage" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.Religion, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateReligion()" } })
+                                    @Html.LabelFor(model => model.Religion, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+                                    <span id="religionErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.EducationalQualification, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateEducationalQualification()" } })
+                                    @Html.LabelFor(model => model.EducationalQualification, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.EducationalQualification, "", new { @class = "text-danger" })
+                                    <span id="educationalQualificationErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mr-2">Passport Type:</label>
+                                    <div>
+                                        <label class="mr-2">Ordinary</label>
+                                        @Html.RadioButtonFor(model => model.PassportType, "Ordinary")
+                                        <label class="mr-2">Official</label>
+                                        @Html.RadioButtonFor(model => model.PassportType, "Official")
+                                        <label class="mr-2">Diplomatic</label>
+                                        @Html.RadioButtonFor(model => model.PassportType, "Diplomatic")
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.PassportType, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateNationality()" } })
+                                    @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                                    <span id="nationalityError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.PassportNumber, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatePassportNumber()" } })
+                                    @Html.LabelFor(model => model.PassportNumber, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PassportNumber, "", new { @class = "text-danger" })
+                                    <span id="passportNumberError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.PlaceOfIssue, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatePlaceOfIssue()" } })
+                                    @Html.LabelFor(model => model.PlaceOfIssue, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PlaceOfIssue, "", new { @class = "text-danger" })
+                                    <span id="placeOfIssueError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.DateOfIssue, new { htmlAttributes = new { @class = "form-control", @max = "2023-07-17", @onfocusout = "validateDateOfIssue()" } })
+                                    @Html.LabelFor(model => model.DateOfIssue, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.DateOfIssue, "", new { @class = "text-danger" })
+                                    <span id="dateOfIssueErrorMessage" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.DateOfExpiry, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "dob", @onfocusout = "validateDateOfExpiry()" } })
+                                    @Html.LabelFor(model => model.DateOfExpiry, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.DateOfExpiry, "", new { @class = "text-danger" })
+                                    <span id="dateOfExpiryErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.PassportOrICNo, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatePassportOrICNo()" } })
+                                    @Html.LabelFor(model => model.PassportOrICNo, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PassportOrICNo, "", new { @class = "text-danger" })
+                                    <span id="passportOrICNoErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.PortOfArrival, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatePortOfArrival()" } })
+                                    @Html.LabelFor(model => model.PortOfArrival, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PortOfArrival, "", new { @class = "text-danger" })
+                                    <span id="portOfArrivalErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ReferenceNameInIndia, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateReferenceNameInIndia()" } })
+                                    @Html.LabelFor(model => model.ReferenceNameInIndia, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ReferenceNameInIndia, "", new { @class = "text-danger" })
+                                    <span id="referenceNameInIndiaErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ReferenceAddressInIndia, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateReferenceAddressInIndia()" } })
+                                    @Html.LabelFor(model => model.ReferenceAddressInIndia, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ReferenceAddressInIndia, "", new { @class = "text-danger" })
+                                    <span id="referenceAddressInIndiaErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.EditorFor(model => model.ReferencePhone, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateReferencePhone()" } })
+                                    @Html.LabelFor(model => model.ReferencePhone, htmlAttributes: new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ReferencePhone, "", new { @class = "text-danger" })
+                                    <span id="referencePhoneErrorMessagee" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mr-2">Photo:</label>
+                                    <div>
+                                        <input type="file" name="file" />
+                                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+
+                                <button type="submit" class="btn btn-primary btn-lg mb-1">Submit</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+    function preventBack() {
+    window.history.forward();
+    }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+    </script>
+    <script>
+        function validateFirstName() {
+            var firstNameInput = document.getElementById('FirstName');
+            var firstNameErrorMessage = document.getElementById('firstNameError');
+
+            if (firstNameInput.value.trim() === '') {
+                firstNameErrorMessage.textContent = 'First name is required.';
+            } else {
+                firstNameErrorMessage.textContent = '';
+            }
+        }
+
+        function validateLastName() {
+            var lastNameInput = document.getElementById('LastName');
+            var lastNameErrorMessage = document.getElementById('lastNameErrorMessage');
+
+            if (lastNameInput.value.trim() === '') {
+                lastNameErrorMessage.textContent = 'Last name is required.';
+            } else {
+                lastNameErrorMessage.textContent = '';
+            }
+        }
+
+        function validateDateOfBirth() {
+            var dateOfBirthInput = document.getElementById('DateOfBirth');
+            var dateOfBirthErrorMessage = document.getElementById('dateOfBirthErrorMessage');
+
+            if (dateOfBirthInput.value.trim() === '') {
+                dateOfBirthErrorMessage.textContent = 'Date of birth is required.';
+            } else {
+                dateOfBirthErrorMessage.textContent = '';
+            }
+        }
+
+        function validatePhoneNumber() {
+            var phoneNumberInput = document.getElementById('Phone');
+            var phoneNumberErrorMessage = document.getElementById('phoneNumberErrorMessage');
+
+            if (phoneNumberInput.value.trim() === '') {
+                phoneNumberErrorMessage.textContent = 'Phone number is required.';
+            } else {
+                phoneNumberErrorMessage.textContent = '';
+            }
+        }
+
+        function validateEmailAddress() {
+            var emailAddressInput = document.getElementById('EmailID');
+            var emailAddressErrorMessage = document.getElementById('emailAddressErrorMessage');
+
+            if (emailAddressInput.value.trim() === '') {
+                emailAddressErrorMessage.textContent = 'Email address is required.';
+            } else {
+                emailAddressErrorMessage.textContent = '';
+            }
+        }
+
+        function validateAddress() {
+            var addressInput = document.getElementById('Address');
+            var addressErrorMessage = document.getElementById('addressErrorMessage');
+
+            if (addressInput.value.trim() === '') {
+                addressErrorMessage.textContent = 'Address is required.';
+            } else {
+                addressErrorMessage.textContent = '';
+            }
+        }
+
+
+        function validateDate(input) {
+            var dateInput = input.value;
+            var errorMessage = input.nextElementSibling;
+
+            if (dateInput.trim() === '') {
+                errorMessage.textContent = 'Date is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+        function validateTownCityOfBirth() {
+            var townCityInput = document.getElementById('TownCityOfBirth');
+            var errorMessage = document.getElementById('townCityOfBirthErrorMessage');
+
+            if (townCityInput.value.trim() === '') {
+                errorMessage.textContent = 'Town/City of Birth is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+        function validateCountryOfBirth() {
+            var countryInput = document.getElementById('CountryOfBirth');
+            var errorMessage = document.getElementById('countryOfBirthErrorMessage');
+
+            if (countryInput.value.trim() === '') {
+                errorMessage.textContent = 'Country of Birth is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+        function validateCitizenshipNationalIdNo() {
+            var citizenshipInput = document.getElementById('CitizenshipNationalIdNo');
+            var errorMessage = document.getElementById('citizenshipNationalIdNoErrorMessage');
+
+            if (citizenshipInput.value.trim() === '') {
+                errorMessage.textContent = 'Citizenship/National ID is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+        function validateReligion() {
+            var religionInput = document.getElementById('Religion');
+            var errorMessage = document.getElementById('religionErrorMessage');
+
+            if (religionInput.value.trim() === '') {
+                errorMessage.textContent = 'Religion is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+        function validateEducationalQualification() {
+            var qualificationInput = document.getElementById('EducationalQualification');
+            var errorMessage = document.getElementById('educationalQualificationErrorMessage');
+
+            if (qualificationInput.value.trim() === '') {
+                errorMessage.textContent = 'Educational Qualification is required.';
+            } else {
+                errorMessage.textContent = '';
+            }
+        }
+
+
+        function validatePassportNumber() {
+            var passportNumberInput = document.getElementById('PassportNumber');
+            var passportNumberErrorMessage = document.getElementById('passportNumberError');
+
+            if (passportNumberInput.value.trim() === '') {
+                passportNumberErrorMessage.textContent = 'Passport number is required.';
+            } else {
+                passportNumberErrorMessage.textContent = '';
+            }
+        }
+
+        function validateUsername() {
+            var usernameInput = document.getElementById('Username');
+            var usernameErrorMessage = document.getElementById('usernameError');
+
+            if (usernameInput.value.trim() === '') {
+                usernameErrorMessage.textContent = 'Username is required.';
+            } else {
+                usernameErrorMessage.textContent = '';
+            }
+        }
+
+        function validateNationality() {
+            var nationalityInput = document.getElementById('Nationality');
+            var nationalityErrorMessage = document.getElementById('nationalityError');
+
+            if (nationalityInput.value.trim() === '') {
+                nationalityErrorMessage.textContent = 'Nationality is required.';
+            } else {
+                nationalityErrorMessage.textContent = '';
+            }
+        }
+
+        function validatePassportNumber() {
+            var passportNumberInput = document.getElementById('PassportNumber');
+            var passportNumberErrorMessage = document.getElementById('passportNumberError');
+
+            if (passportNumberInput.value.trim() === '') {
+                passportNumberErrorMessage.textContent = 'Passport number is required.';
+            } else {
+                passportNumberErrorMessage.textContent = '';
+            }
+        }
+
+        function validatePlaceOfIssue() {
+            var placeOfIssueInput = document.getElementById('PlaceOfIssue');
+            var placeOfIssueErrorMessage = document.getElementById('placeOfIssueError');
+
+            if (placeOfIssueInput.value.trim() === '') {
+                placeOfIssueErrorMessage.textContent = 'Place of issue is required.';
+            } else {
+                placeOfIssueErrorMessage.textContent = '';
+            }
+        }
+
+        function validateDateOfIssue() {
+            var dateOfIssueInput = document.getElementById('DateOfIssue');
+            var dateOfIssueErrorMessage = document.getElementById('dateOfIssueError');
+
+            if (dateOfIssueInput.value.trim() === '') {
+                dateOfIssueErrorMessage.textContent = 'Date of issue is required.';
+            } else {
+                dateOfIssueErrorMessage.textContent = '';
+            }
+        }
+
+        function validateDateOfExpiry() {
+            var dateOfExpiryInput = document.getElementById('DateOfExpiry');
+            var dateOfExpiryErrorMessage = document.getElementById('dateOfExpiryError');
+
+            if (dateOfExpiryInput.value.trim() === '') {
+                dateOfExpiryErrorMessage.textContent = 'Date of expiry is required.';
+            } else {
+                dateOfExpiryErrorMessage.textContent = '';
+            }
+        }
+
+        function validatePassportOrICNo() {
+            var passportOrICNoInput = document.getElementById('PassportOrICNo');
+            var passportOrICNoErrorMessage = document.getElementById('passportOrICNoError');
+
+            if (passportOrICNoInput.value.trim() === '') {
+                passportOrICNoErrorMessage.textContent = 'Passport or IC number is required.';
+            } else {
+                passportOrICNoErrorMessage.textContent = '';
+            }
+        }
+
+        function validatePortOfArrival() {
+            var portOfArrivalInput = document.getElementById('PortOfArrival');
+            var portOfArrivalErrorMessage = document.getElementById('portOfArrivalError');
+
+            if (portOfArrivalInput.value.trim() === '') {
+                portOfArrivalErrorMessage.textContent = 'Port of arrival is required.';
+            } else {
+                portOfArrivalErrorMessage.textContent = '';
+            }
+        }
+
+        function validateReferenceNameInIndia() {
+            var referenceNameInIndiaInput = document.getElementById('ReferenceNameInIndia');
+            var referenceNameInIndiaErrorMessage = document.getElementById('referenceNameInIndiaError');
+
+            if (referenceNameInIndiaInput.value.trim() === '') {
+                referenceNameInIndiaErrorMessage.textContent = 'Reference name in India is required.';
+            } else {
+                referenceNameInIndiaErrorMessage.textContent = '';
+            }
+        }
+
+        function validateReferenceAddressInIndia() {
+            var referenceAddressInIndiaInput = document.getElementById('ReferenceAddressInIndia');
+            var referenceAddressInIndiaErrorMessage = document.getElementById('referenceAddressInIndiaError');
+
+            if (referenceAddressInIndiaInput.value.trim() === '') {
+                referenceAddressInIndiaErrorMessage.textContent = 'Reference address in India is required.';
+            } else {
+                referenceAddressInIndiaErrorMessage.textContent = '';
+            }
+        }
+
+        function validateReferencePhone() {
+            var referencePhoneInput = document.getElementById('ReferencePhone');
+            var referencePhoneErrorMessage = document.getElementById('referencePhoneError');
+
+            if (referencePhoneInput.value.trim() === '') {
+                referencePhoneErrorMessage.textContent = 'Reference phone is required.';
+            } else {
+                referencePhoneErrorMessage.textContent = '';
+            }
+        }
+        //Remove past dates
+        const dobInputs = document.querySelectorAll('#dob');
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        dobInputs.forEach(function (input) {
+            input.setAttribute('min', currentDate);
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

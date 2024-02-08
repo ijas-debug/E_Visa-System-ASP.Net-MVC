@@ -1,0 +1,114 @@
+﻿@model IEnumerable<FinalProject.Models.UserClass>
+
+@{
+    ViewBag.Title = "UsersView";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info">
+        <strong> Info ! </strong>  @TempData["InfoMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+else if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong> Success ! </strong>  @TempData["SuccessMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+
+else if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong> Error ! </strong>  @TempData["ErrorMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span>&times;</span>
+        </button>
+    </div>
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card rounded-3">
+                <div class="card-body" >
+                    <div>
+                        <h2 class="text-center">Users details</h2>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.FirstName)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </th>
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Gender)
+                                    </th>
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.EmailAddress)
+                                    </th>
+
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Username)
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Username)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-success" })
+                                        
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward();
+    }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>

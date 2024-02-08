@@ -1,0 +1,274 @@
+﻿@model FinalProject.Models.VisaApplication
+
+@{
+    ViewBag.Title = "ApplicantDetails";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong> Error ! </strong> @TempData["ErrorMessage"]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                    <h2 class="card-title">Applicant details</h2>
+                    <div>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Photo)
+                        </dt>
+                        <dd>
+                            <img src="@Url.Content(Model.Photo)" height="100px" width="100px" />
+                        </dd>
+                    </div>
+
+
+                    <div>
+
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FirstName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LastName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateOfBirth)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DateOfBirth)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.EmailID)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.EmailID)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Phone)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Address)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ExpectedDateOfArrival)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ExpectedDateOfArrival)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ExpectedDateOfDeparture)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ExpectedDateOfDeparture)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.VisaService)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.VisaService)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Gender)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TownCityOfBirth)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TownCityOfBirth)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CountryOfBirth)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CountryOfBirth)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CitizenshipNationalIdNo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CitizenshipNationalIdNo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Religion)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Religion)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.EducationalQualification)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.EducationalQualification)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PassportType)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PassportType)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Nationality)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Nationality)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PassportNumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PassportNumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PlaceOfIssue)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PlaceOfIssue)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateOfIssue)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DateOfIssue)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateOfExpiry)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DateOfExpiry)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PassportOrICNo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PassportOrICNo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PortOfArrival)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PortOfArrival)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ReferenceNameInIndia)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReferenceNameInIndia)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ReferenceAddressInIndia)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReferenceAddressInIndia)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ReferencePhone)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.ReferencePhone)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Status)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+
+                        @Html.ActionLink("Back to List", "ApplicantsView")
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+         function preventBack() {
+                window.history.forward();
+            }
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+</script> 

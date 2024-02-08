@@ -1,0 +1,35 @@
+﻿.vh-100 {
+    height: 100vh;
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.card-body {
+    padding: 4rem 4.5rem !important;
+}
+
+.form-outline {
+    position: relative;
+}
+
+.form-control-lg {
+    height: calc(1.5em + 1.5rem + 2px) !important;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.25rem;
+}
+
+.btn-dark {
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}
+
+    .btn-dark:hover {
+        background-color: #292d31 !important;
+        border-color: #292d31 !important;
+    }
+
+.footercolor {
+    padding-top: 200px;
+}

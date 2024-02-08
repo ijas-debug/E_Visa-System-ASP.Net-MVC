@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "UserVisaStatus";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Visa Status</title>
+    <!-- Include your CSS and JavaScript files here -->
+    <!-- For example: -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <link href="~/Content/CSS/VisaStatus.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="header-image">
+                            <img src="https://4.bp.blogspot.com/-NWHONLHseIE/VuJ5ddlVAoI/AAAAAAAAAz0/0OWrZgicvGgVDJ6yHNBqYGMW9JgiM0_eA/s1600/_stya%2Bmeviyjayta%2527.jpg" alt="Header Image" width="150" height="100">
+                        </div>
+                        <h3 class="text-center visaheading">INDIAN e-VISA</h3>
+                        <h4 class="text-center visasubheading">Electronic Travel Authorization (ETA)</h4>
+
+                        @if (Session["emailid"] != null)
+                        {
+                            <p>Dear @Session["emailid"].ToString() </p>
+                            <p>Your application for Indian e-Visa has been processed with following result</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table style="margin: 0 auto;">
+                                        <tr>
+                                            <th>First Name:</th>
+                                            <td>@Model.FirstName</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Last Name:</th>
+                                            <td>@Model.LastName</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Expected Date of Arrival:</th>
+                                            <td>@Model.ExpectedDateOfArrival.ToShortDateString()</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Expected Date of Departure:</th>
+                                            <td>@Model.ExpectedDateOfDeparture.ToShortDateString()</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Visa Service:</th>
+                                            <td>@Model.VisaService</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nationality:</th>
+                                            <td>@Model.Nationality</td>
+                                        </tr>
+                                        <tr>
+                                            <th>PassportNumber:</th>
+                                            <td>@Model.PassportNumber</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Port of Arrival:</th>
+                                            <td>@Model.PortOfArrival</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Application Status:</th>
+                                            <td>@Model.Status</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-center">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/QR_Code_Example.svg/1200px-QR_Code_Example.svg.png" alt="QR Code Image" width="100" height="100">
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="@Html.ViewData["Img"]" alt="Image" height="100" width="100" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 class="visasubheadingTwo">e-Visa Validity period is 365 days from the date of issuance of this ETA</h6>
+                                <br />
+                                <div class="subsection">
+                                    <p>>Activities Permitted: Recreation/Sight seeing</p>
+                                    <p>>Continuous stay during each visit should not exceed 180 days.</p>
+                                    <p>>Multiple entries will be granted within the e_visa validity period stamped on your passport</p>
+                                </div>
+                            </div>
+                            <br />
+                            <p>For Tele Enquiries(TVRS enquiry) call at +91-11-24300666 Please use 00482333319 as key.</p>
+
+                            <div class="subsection">
+                                <p>Note :</p>
+                                <p>- Please carry a copy of this ETA at the time of travel.</p>
+                                <p>- e-Visa is non-amendable, non-convertible & not valid for visiting Protected/Restricted and Content Areas. If you intend to visit Proposed/Restricted Content areas, you would require prior permission from the Civil Authority. Please visit (http://www.mone rgoncentrapp).</p>
+                                <p>- Biometric details of the applicant will be mandatorily captured at Immigration on arrival in India.</p>
+                                <p>- Applicant must arrive with the same passport as mentioned above.</p>
+                                <p>- Applicant can arrive at 24 e-Visa designated airports, i.e., Ahmedabad, Amritsar, Bagdogra, Bengaluru, Calicut, Chennai, Chandigarh, Cochin, Coimbatore, Delhi, Gaya, Goa, Guwahati, Hyderabad, Jaipur, Kolkata, Lucknow, Mangalore, Mumbai, Nagpur, Pune, Tiruchirapalli, Trivandrum, and Varanasi, and 3 designated seaports (i.e., Cochin, Goa, Mangalore). However, the departure can be from any of the authorized Immigration Check Posts in India.</p>
+                                <p>- e-Visa is not allowed for employment, NGO/volunteer activities, journalism, and conference purposes.</p>
+                                <p>- Once you have entered India, you will be subject to Indian Laws.</p>
+                                <p>- This electronic travel authorization does not entitle you for guaranteed entry into India. Your entry can still be refused at the time of arrival.</p>
+                            </div>
+                        }
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="window.print()" class="print-button">Print</button>
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+        </script>
+</body >
+</html >

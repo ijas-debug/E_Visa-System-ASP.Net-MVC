@@ -1,0 +1,402 @@
+﻿@model FinalProject.Models.UserClass
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+</head>
+<body>
+    @* Display success message *@
+    @if (!string.IsNullOrEmpty(TempData["Message"] as string))
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Message"]
+        </div>
+    }
+    <section class="h-100 h-custom" style="background-color: #D8F9F9;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                        <img src="https://images.pexels.com/photos/2764364/pexels-photo-2764364.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                             alt="Sample photo">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Sign up</h3>
+
+                            @using (Html.BeginForm("Index", "UserRegistration", FormMethod.Post, new { @class = "px-md-2", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @onfocusout = "validateFirstName()" })
+                                    @Html.LabelFor(model => model.FirstName, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    <span id="firstNameError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @onfocusout = "validateLastName()" })
+                                    @Html.LabelFor(model => model.LastName, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    <span id="lastNameError" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline datepicker">
+                                            @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", @type = "date", @max = "2005-04-11", @onfocusout = "validateDateOfBirth()" })
+                                            @Html.LabelFor(model => model.DateOfBirth, new { @class = "form-label" })
+                                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                            <span id="dateOfBirthError" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div>
+                                            <label class="mr-2">Gender:</label>
+                                            <div>
+                                                <label class="mr-2">Male</label>
+                                                @Html.RadioButtonFor(model => model.Gender, "Male")
+                                                <label class="mr-2">Female</label>
+                                                @Html.RadioButtonFor(model => model.Gender, "Female")
+                                                <label class="mr-2">Others</label>
+                                                @Html.RadioButtonFor(model => model.Gender, "Others")
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @onfocusout = "validatePhoneNumber()" })
+                                    @Html.LabelFor(model => model.PhoneNumber, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    <span id="phoneNumberErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @onfocusout = "validateEmailAddress()" })
+                                    @Html.LabelFor(model => model.EmailAddress, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                                    <span id="emailAddressErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @onfocusout = "validateAddress()" })
+                                    @Html.LabelFor(model => model.Address, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    <span id="addressErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @onfocusout = "validateCountry()" })
+                                    @Html.LabelFor(model => model.Country, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    <span id="countryErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.State, new { @class = "form-control", @onfocusout = "validateState()" })
+                                    @Html.LabelFor(model => model.State, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                    <span id="stateErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @onfocusout = "validateCity()" })
+                                    @Html.LabelFor(model => model.City, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                    <span id="cityErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Postcode, new { @class = "form-control", @onfocusout = "validatePostcode()" })
+                                    @Html.LabelFor(model => model.Postcode, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+                                    <span id="dateOfBirthError" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.PassportNumber, new { @class = "form-control", @onfocusout = "validatePassportNumber()" })
+                                    @Html.LabelFor(model => model.PassportNumber, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.PassportNumber, "", new { @class = "text-danger" })
+                                    <span id="passportNumberErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @onfocusout = "validateUsername()" })
+                                    @Html.LabelFor(model => model.Username, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                    <span id="usernameErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @onfocusout = "validatePassword()" })
+                                    @Html.LabelFor(model => model.Password, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    <span id=" passwordErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @onfocusout = "validateConfirmPassword()" })
+                                    @Html.LabelFor(model => model.ConfirmPassword, new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    <span id="confirmPasswordErrorMessage" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mr-2" for="Photo">Photo:</label>
+                                    <div>
+                                        <input type="file" name="file" />
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footercolor">
+
+        <!-- Footer -->
+        <footer class=" text-center text-dark">
+            <!-- Grid container -->
+            <div class="container p-4 footerayshel">
+                <!-- Section: Social media -->
+                <section class="mb-4">
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+
+
+                    <!-- Google -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.justdial.com/Malappuram/Ayshel-Boutique-Near-Musjid-Mangalam-Mlp/9999PX483-X483-190322202629-T6N6_BZDET" role="button">
+                        <i class="fab fa-google"></i>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.instagram.com/ayshellshop/?hl=en" role="button">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+
+                    <!-- Section: Social media -->
+                    <!-- Section: Text -->
+                    <section class="mb-4">
+                        <p>
+                            Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.
+                        </p>
+                    </section>
+                    <!-- Section: Text -->
+                    <!-- Copyright -->
+
+        </footer>
+
+
+
+        <div class="footerayshel">
+            <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-dark" href="https://mdbootstrap.com/">E-Visa.com</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+
+
+        <script>
+            function validateFirstName() {
+                var firstNameInput = document.getElementById('FirstName');
+                var firstNameErrorMessage = document.getElementById('firstNameError');
+
+                if (firstNameInput.value.trim() === '') {
+                    firstNameErrorMessage.textContent = 'First name is required.';
+                } else {
+                    firstNameErrorMessage.textContent = '';
+                }
+            }
+
+            function validateLastName() {
+                var lastNameInput = document.getElementById('LastName');
+                var lastNameErrorMessage = document.getElementById('lastNameError');
+
+                if (lastNameInput.value.trim() === '') {
+                    lastNameErrorMessage.textContent = 'Last name is required.';
+                } else {
+                    lastNameErrorMessage.textContent = '';
+                }
+            }
+
+            function validateDateOfBirth() {
+                var dateOfBirthInput = document.getElementById('DateOfBirth');
+                var dateOfBirthErrorMessage = document.getElementById('dateOfBirthError');
+
+                if (dateOfBirthInput.value.trim() === '') {
+                    dateOfBirthErrorMessage.textContent = 'Date of birth is required.';
+                } else {
+                    dateOfBirthErrorMessage.textContent = '';
+                }
+            }
+
+            function validatePhoneNumber() {
+                var phoneNumberInput = document.getElementById('PhoneNumber');
+                var phoneNumberErrorMessage = document.getElementById('phoneNumberError');
+
+                if (phoneNumberInput.value.trim() === '') {
+                    phoneNumberErrorMessage.textContent = 'Phone number is required.';
+                } else {
+                    phoneNumberErrorMessage.textContent = '';
+                }
+            }
+
+            function validateEmailAddress() {
+                var emailAddressInput = document.getElementById('EmailAddress');
+                var emailAddressErrorMessage = document.getElementById('emailAddressError');
+
+                if (emailAddressInput.value.trim() === '') {
+                    emailAddressErrorMessage.textContent = 'Email address is required.';
+                } else {
+                    emailAddressErrorMessage.textContent = '';
+                }
+            }
+
+            function validateAddress() {
+                var addressInput = document.getElementById('Address');
+                var addressErrorMessage = document.getElementById('addressError');
+
+                if (addressInput.value.trim() === '') {
+                    addressErrorMessage.textContent = 'Address is required.';
+                } else {
+                    addressErrorMessage.textContent = '';
+                }
+            }
+
+            function validateCountry() {
+                var countryInput = document.getElementById('Country');
+                var countryErrorMessage = document.getElementById('countryError');
+
+                if (countryInput.value.trim() === '') {
+                    countryErrorMessage.textContent = 'Country is required.';
+
+                } else {
+                    countryErrorMessage.textContent = '';
+                }
+            }
+
+            function validateState() {
+                var stateInput = document.getElementById('State');
+                var stateErrorMessage = document.getElementById('stateError');
+
+                if (stateInput.value.trim() === '') {
+                    stateErrorMessage.textContent = 'State is required.';
+                } else {
+                    stateErrorMessage.textContent = '';
+                }
+            }
+
+            function validateCity() {
+                var cityInput = document.getElementById('City');
+                var cityErrorMessage = document.getElementById('cityError');
+
+                if (cityInput.value.trim() === '') {
+                    cityErrorMessage.textContent = 'City is required.';
+                } else {
+                    cityErrorMessage.textContent = '';
+                }
+            }
+
+            function validatePostcode() {
+                var postcodeInput = document.getElementById('Postcode');
+                var postcodeErrorMessage = document.getElementById('postcodeError');
+
+                if (postcodeInput.value.trim() === '') {
+                    postcodeErrorMessage.textContent = 'Postcode is required.';
+                } else {
+                    postcodeErrorMessage.textContent = '';
+                }
+            }
+
+            function validatePassportNumber() {
+                var passportNumberInput = document.getElementById('PassportNumber');
+                var passportNumberErrorMessage = document.getElementById('passportNumberError');
+
+                if (passportNumberInput.value.trim() === '') {
+                    passportNumberErrorMessage.textContent = 'Passport number is required.';
+                } else {
+                    passportNumberErrorMessage.textContent = '';
+                }
+            }
+
+            function validateUsername() {
+                var usernameInput = document.getElementById('Username');
+                var usernameErrorMessage = document.getElementById('usernameError');
+
+                if (usernameInput.value.trim() === '') {
+                    usernameErrorMessage.textContent = 'Username is required.';
+                } else {
+                    usernameErrorMessage.textContent = '';
+                }
+            }
+
+            function validatePassword() {
+                var passwordInput = document.getElementById('Password');
+                var passwordErrorMessage = document.getElementById('passwordError');
+
+                if (passwordInput.value.trim() === '') {
+                    passwordErrorMessage.textContent = 'Password is required.';
+                } else {
+                    passwordErrorMessage.textContent = '';
+                }
+            }
+
+            function validateConfirmPassword() {
+                var confirmPasswordInput = document.getElementById('ConfirmPassword');
+                var confirmPasswordErrorMessage = document.getElementById('confirmPasswordError');
+                var passwordInput = document.getElementById('Password');
+
+                if (confirmPasswordInput.value.trim() === '') {
+                    confirmPasswordErrorMessage.textContent = 'Confirm password is required.';
+                } else if (confirmPasswordInput.value !== passwordInput.value) {
+                    confirmPasswordErrorMessage.textContent = 'Passwords do not match.';
+                } else {
+                    confirmPasswordErrorMessage.textContent = '';
+                }
+            }
+
+        </script>
+
+
+    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
